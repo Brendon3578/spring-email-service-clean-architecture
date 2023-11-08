@@ -11,17 +11,17 @@ Ele recebe o envio do e-mail através da API e envia para um serviço externo de
 A aplicação foi desenvolvida seguindo os princípios do Clean Architecture
 
 - `/controllers/` - Camada de Controllers da aplicação RESTful
-  - Classe `EmailSenderController` - É o controller RESTful da aplicação Spring
+  - Classe **EmailSenderController** - É o controller RESTful da aplicação Spring
 - `/infrastrucutre` - É o provedor do serviço de e-mail externo, implementação do serviço da biblioteca [Simple Java Mail](https://www.simplejavamail.org/) para o envio de e-mails
-    - Classe `SimpleJavaMailConfig` - Guarda o objeto `Mailer` **Bean** de configuração do Simple Java Mail, instanciado automaticamente pelo Spring
-    - Classe `SimpleJavaMailSender` - Disponibiliza um **Service** com o propósito de ser um Gateway usado na aplicação, sendo a **regra de negócio** para o envio de e-mails
+    - Classe **SimpleJavaMailConfig** - Guarda o objeto **Mailer**, é um **Bean** de configuração do Simple Java Mail, instanciado automaticamente pelo Spring
+    - Classe **SimpleJavaMailSender** - Disponibiliza um **Service** com o propósito de ser um Gateway usado na aplicação, sendo a **regra de negócio** para o envio de e-mails
 - `/core/` - Diretório que guarda os **Casos de Usos** e regras de negócio da aplicação
-  - Interface `EmailSenderUseCase` - é uma interface (contrato) de regra de negócio do serviço de envio e-mail (alto nível da aplicação), sendo também agnóstica (não depende) em relação aos outros componentes da aplicação
-  - Record `EmailRequest` - É o DTO utilizado no _Body_ da requisição do Controller principal
+  - Interface **EmailSenderUseCase** - é uma interface (contrato) de regra de negócio do serviço de envio e-mail (alto nível da aplicação), sendo também agnóstica (não depende) em relação aos outros componentes da aplicação
+  - Record **EmailRequest** - É o DTO utilizado no _Body_ da requisição do Controller principal
 - `/application/` - É a camada intermediaria que dialoga com os casos de usos e os serviços externos (que estão no pacote infrastructure)
-  - Arquivo `EmailSenderService` - é o serviço em si que é utilizado no controller
+  - Arquivo **EmailSenderService** - é o serviço em si que é utilizado no controller
 - `/adapters/` - Disponibiliza interfaces que **adaptam** o mundo exterior (APIs externas como a classe [SimpleJavaMailSender](src/main/java/com/brendongomes/emailservice/infrastructure/simplejavamail/SimpleJavaMailSender.java) para a aplicação, com o 
-  - Interface `EmailSenderGateway` - Define a interface (contrato) que todas as APIs externas de envio de e-mails devem implementar
+  - Interface **EmailSenderGateway** - Define a interface (contrato) que todas as APIs externas de envio de e-mails devem implementar
 
 ## 🔥 Testando aplicação
 
